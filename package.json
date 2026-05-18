@@ -1,0 +1,13 @@
+{
+  "name": "code-coverage-test",
+  "version": "1.0.0",
+  "description": "Test repo for code coverage upload diagnostics",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "jest --coverage --coverageReporters=cobertura --coverageReporters=text",
+    "test:ci": "jest --coverage --coverageReporters=cobertura --coverageReporters=text --coverageDirectory=./coverage"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0"
+  }
+}
