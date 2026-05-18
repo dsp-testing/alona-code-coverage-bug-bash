@@ -24,4 +24,3 @@ jobs:
           file: coverage/cobertura-coverage.xml
           language: javascript
           label: jest
-          fail-on-error: true
