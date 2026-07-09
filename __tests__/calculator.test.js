@@ -21,5 +21,10 @@ describe('Calculator', () => {
     expect(calc.multiply(3, 4)).toBe(12);
   });
 
-  // divide, power, and factorial are NOT tested
+  test('divides two numbers', () => {
+    expect(calc.divide(10, 2)).toBe(5);
+    expect(calc.divide(-6, 3)).toBe(-2);
+  });
+
+  // divide-by-zero, power and factorial are NOT tested
 });
