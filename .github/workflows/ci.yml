@@ -3,6 +3,8 @@ name: CI with Coverage
 on:
   pull_request:
     branches: [main]
+  push:
+    branches: [main]
 
 jobs:
   test:
@@ -18,9 +20,27 @@ jobs:
 
       - run: npm run test:ci
 
-      - name: Upload coverage
-        uses: actions/upload-code-coverage@joshhale/refactor-to-python-script
+      - name: Upload coverage artifact
+        if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+        uses: actions/upload-artifact@v4
         with:
-          file: coverage/cobertura-coverage.xml
-          language: javascript
-          label: jest
+          name: coverage-report-javascript
+          path: coverage/cobertura-coverage.xml
+
+  upload-coverage-javascript:
+    needs: test
+    if: ${{ !cancelled() && needs.test.result == 'success' && (github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository) }}
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      code-quality: write
+    steps:
+      - name: Download coverage artifact
+        uses: actions/download-artifact@v4
+        with:
+          name: coverage-report-javascript
+      - uses: actions/upload-code-coverage@v1
+        with:
+          file: cobertura-coverage.xml
+          language: JavaScript
+          label: code-coverage-agent
