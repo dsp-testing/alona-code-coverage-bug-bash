@@ -233,28 +233,3 @@ Change
 
 
  
-const express = require('express');
-
-const app = express();
-app.get('/', (req, res) => res.send(`Hello, ${req.query.name}!`));
-
-
-
-function isOdd(x) {
-    if (x % 2 !== 0) {
-        return false;
-    } else {
-        return true;
-    }
-}
-
-function main() {
-    if (isOdd(5)) {
-        return
-    } else {
-        return
-    }
-
-    // Say hello to the user
-    console.log("Hello, wrold!");
-}
