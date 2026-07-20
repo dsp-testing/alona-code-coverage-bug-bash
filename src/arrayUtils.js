@@ -77,7 +77,6 @@ const app = express();
 app.get('/', (req, res) => res.send(`Hello, ${req.query.name}!`));
 
 
-
 function isOdd(x) {
     if (x % 2 !== 0) {
         return false;
